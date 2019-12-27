@@ -2,6 +2,7 @@
 
 {% block content %}
     <div class='row'>
+
         <div class='col-8'>
             {% with messages = get_flashed_messages() %}
                 {% if messages %}
@@ -9,13 +10,14 @@
                     {% for message in messages %}
                         {{ message }}<br>
                     {% endfor %}
-        </div>
-        {% endif %}
+                </div>
+            {% endif %}
     {% endwith %}
+
         <h2>Новости</h2>
-            {% for i in news %}
-                <h3><a href="{{ i.url }}">{{ i.title }}</a></h3>
-                <p>{{ i.published.strftime('%d.%m.%Y') }}</p>
+            {% for new in news %}
+                <h3><a href="{{ url_for('news.single_news', news_id=new.id) }}">{{ new.title }}</a></h3>
+                <p>{{ new.published.strftime('%d.%m.%Y') }}</p>
                 <hr>
             {% endfor %}
         </div>
@@ -28,5 +30,6 @@
                 Сервис погоды временно недоступен
             {% endif %}
         </div>
+
     </div>
 {% endblock %}

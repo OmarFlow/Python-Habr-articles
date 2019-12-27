@@ -1,5 +1,6 @@
 from flask import Flask, render_template, flash, redirect, url_for, request
 from flask_login import LoginManager, current_user, login_required
+from flask_migrate import Migrate
 
 from webapp.db import db
 from webapp.user.models import User
@@ -17,6 +18,9 @@ def create_app():
     login = LoginManager()
     login.init_app(app)
     login.login_view = 'user.login'
+    
+    migrate = Migrate(app, db)
+    
     app.register_blueprint(user_blueprint)
     app.register_blueprint(admin_blueprint)
     app.register_blueprint(news_blueprint)
