@@ -12,8 +12,8 @@ if platform.system() == 'Windows':
     locale.setlocale(locale.LC_ALL, "russian")
 else:
     locale.setlocale(locale.LC_TIME, 'ru_RU.UTF-8')
-   
-    
+
+
 def parse_news_date(date_str):
     if 'сегодня' in date_str:
         today = datetime.now()
@@ -28,10 +28,13 @@ def parse_news_date(date_str):
 
 
 def get_news_snippets():
-    html = get_html('https://habr.com/ru/search/?target_type=posts&q=python&order_by=date')
+    html = get_html(
+        'https://habr.com/ru/search/?target_type=posts&q=python&order_by=date')
     if html:
         soup = BeautifulSoup(html, 'html.parser')
-        all_news = soup.find('ul', class_='content-list_posts').findAll('li', class_='content-list__item_post')
+        all_news = soup.find('ul', class_='content-list_posts'
+                             ).findAll(
+                            'li', class_='content-list__item_post')
         for news in all_news:
             title = news.find('a', class_='post__title_link').text
             url = news.find('a', class_='post__title_link')['href']
@@ -46,7 +49,8 @@ def get_news_content():
         html = get_html(news.url)
         if html:
             soup = BeautifulSoup(html, 'html.parser')
-            news_text = soup.find('div', class_='post__text-html').decode_contents()
+            news_text = soup.find('div', class_='post__text-html'
+                                  ).decode_contents()
             if news_text:
                 news.text = news_text
                 db.session.add(news)

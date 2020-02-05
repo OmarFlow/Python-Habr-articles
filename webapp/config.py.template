@@ -1,0 +1,21 @@
+import os
+from datetime import timedelta
+
+basedir = os.path.abspath(os.path.dirname(__file__))
+
+WEATHER_DEFAULT_CITY = 'город, по которому вы хотите получать погоду, напимер : Moscow,Russia'
+
+WEATHER_API_KEY = 'ваш api ключ от сервиса worldweatheronline.com'
+
+WEATHER_URL = 'http://api.worldweatheronline.com/premium/v1/weather.ashx'
+
+# Подробно прочитать про настройки sqlalchemy можно по ссылке ниже
+# https://flask-sqlalchemy.palletsprojects.com/en/2.x/config/
+
+SQLALCHEMY_DATABASE_URI = 'путь, к вашей базе данных'
+
+SECRET_KEY = 'ваш серкетный ключ'
+
+SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+USER_AGENT = 'ваш юзер-агент'

@@ -4,7 +4,32 @@
 
     <div class="row">
         <div class="col-8 news-content">
+            {% include('messages.html') %}
             {{ news.text|safe }}
+
+            {% if news.comments %}
+                <h3>Комментарии:</h3>
+                {% for comment in news.comments %}
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-text">{{ comment.text }}</p>
+                        <p class="card-text">
+                            <small>Опубликовано: {{ comment.created.strftime('%d.%m.%Y') }} | 
+                                Автор: {{ comment.user.username }}</small>
+                        </p>
+                    </div>
+                </div>
+                {% endfor %}
+            {% endif %}
+            <form action="" method="POST">
+                {{ form.hidden_tag() }}
+                <div class="form-group">
+                    {{ form.text.label }}
+                    {{ form.text() }}
+                </div>
+                {{ form.submit() }}
+            </form>
+            
         </div>
         
         <div class="col-4">
